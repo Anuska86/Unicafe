@@ -1,4 +1,26 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
+
+const Statistics = (props) => {
+  console.log(props)
+  if (props.values.allClicks>0) {
+  return (
+    <div>
+      <h1>Statistics</h1>
+      <div>All clicks: {props.values.allClicks}</div>
+      <div>Average: {props.values.average}</div>
+      <div>Positive: {props.values.good / props.values.allClicks}%</div>
+    </div>
+  );
+  }else{
+    return (
+      <div>
+        <h1>Statistics</h1>
+        <span>No feedback given</span>
+      </div>
+    );
+  }
+};
 
 const App = () => {
   //save each button clicks in its own state
@@ -26,6 +48,12 @@ const App = () => {
     setAverage(average - 1);
   };
 
+  const values = {
+    allClicks: allClicks,
+    average: average,
+    good: good
+  };
+
   return (
     <div>
       <div>
@@ -37,9 +65,7 @@ const App = () => {
         <button onClick={handleBadClick}>Bad</button>
         {bad}
       </div>
-      <div>All clicks: {allClicks}</div>
-      <div>Average: {average}</div>
-      <div>Positive: {good/allClicks}%</div>
+      <Statistics values={values}/>
     </div>
   );
 };
