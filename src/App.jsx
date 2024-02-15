@@ -51,7 +51,7 @@ const copy = { ...points };
 
 const App = () => {
   //save each button clicks in its own state
-  const [currentVotes,setcurrentVotes] = useState(0);
+  const [currentVotes, setcurrentVotes] = useState(0);
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
@@ -73,6 +73,8 @@ const App = () => {
     copy[anecselected] += 1;
     setcurrentVotes(copy[anecselected]);
     console.log(copy);
+    const mostVotes = Math.max(...Object.values(copy));
+    console.log(mostVotes);
   };
 
   const handleGoodClick = () => {
@@ -139,20 +141,21 @@ const App = () => {
 
           <tr>
             <th>
-              <h1>Anecdotes</h1>
+              <h1>Anecdote of the day</h1>
             </th>
           </tr>
-          <tr>
-            <Button
-              name="Next Anecdote"
-              handle={handleAnecdotesClick}
-              value={anecdotes[anecselected]}
-            />
-          </tr>
+          <tr> {anecdotes[anecselected]}</tr>
           <tr>has {currentVotes} votes</tr>
           <tr>
-            <Button name="Vote" handle={handlePointsClick}/>
+            <Button name="Vote" handle={handlePointsClick} />
           </tr>
+          <tr>
+            <Button name="Next Anecdote" handle={handleAnecdotesClick} />
+          </tr>
+          <th>
+            <h1>Anecdote with most votes</h1>
+          </th>
+          <tr></tr>
         </table>
       </div>
     </div>
