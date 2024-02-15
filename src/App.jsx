@@ -5,7 +5,6 @@ const Statistics = (props) => {
   if (props.values.allClicks > 0) {
     return (
       <div>
-
         <StatisticLine title="All clicks" value={props.values.allClicks} />
 
         <StatisticLine title="Average" value={props.values.average} />
@@ -19,7 +18,7 @@ const Statistics = (props) => {
   } else {
     return (
       <div>
-          <tr>No feedback given</tr>
+        <tr>No feedback given</tr>
       </div>
     );
   }
@@ -46,9 +45,13 @@ const StatisticLine = (props) => {
   );
 };
 
+const points = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 };
+
+const copy = { ...points };
+
 const App = () => {
   //save each button clicks in its own state
-
+  const [currentVotes,setcurrentVotes] = useState(0);
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
@@ -65,6 +68,12 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
   const [anecselected, setAnecselected] = useState(0);
+
+  const handlePointsClick = () => {
+    copy[anecselected] += 1;
+    setcurrentVotes(copy[anecselected]);
+    console.log(copy);
+  };
 
   const handleGoodClick = () => {
     setGood(good + 1);
@@ -90,12 +99,10 @@ const App = () => {
   };
 
   const handleAnecdotesClick = () => {
-    const randomNumber =Math.floor(Math.random()*anecdotes.length);
+    const randomNumber = Math.floor(Math.random() * anecdotes.length);
     setAnecselected(randomNumber);
+    setcurrentVotes(copy[randomNumber]);
   };
-
-
-  
 
   return (
     <div>
@@ -120,11 +127,12 @@ const App = () => {
           <tr>
             <Button name="Bad" handle={handleBadClick} value={bad} />
           </tr>
+
           <tr>
-          <th>
+            <th>
               <h1>Statistics</h1>
             </th>
-            </tr>
+          </tr>
           <tr>
             <Statistics values={values} />
           </tr>
@@ -136,10 +144,14 @@ const App = () => {
           </tr>
           <tr>
             <Button
-              name="Anecdotes"
+              name="Next Anecdote"
               handle={handleAnecdotesClick}
               value={anecdotes[anecselected]}
             />
+          </tr>
+          <tr>has {currentVotes} votes</tr>
+          <tr>
+            <Button name="Vote" handle={handlePointsClick}/>
           </tr>
         </table>
       </div>
