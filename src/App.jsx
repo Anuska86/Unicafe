@@ -48,8 +48,9 @@ const StatisticLine = (props) => {
 const points = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 };
 
 const copy = { ...points };
+
 const App = () => {
-  //save each button clicks in its own state
+  const [mostVotes, setMostVotes] = useState(0);
   const [keyWithMoreVotes, setkeyWithMoreVotes] = useState(0);
   const [currentVotes, setcurrentVotes] = useState(0);
   const [good, setGood] = useState(0);
@@ -73,13 +74,12 @@ const App = () => {
     copy[anecselected] += 1;
     setcurrentVotes(copy[anecselected]);
     console.log(copy);
-    const mostVotes = Math.max(...Object.values(copy));
 
-    console.log(mostVotes);
+    setkeyWithMoreVotes(
+      Object.keys(copy).reduce((a, b) => (copy[a] > copy[b] ? a : b))
+    );
+    setMostVotes(Math.max(...Object.values(copy)));
   };
-
-  const keyWithMoreVotes = Object.keys(copy).reduce((a, b) => copy[a] > copy[b] ? a : b);
-  console.log (keyWithMoreVotes)
 
   const handleGoodClick = () => {
     setGood(good + 1);
@@ -159,7 +159,8 @@ const App = () => {
           <th>
             <h1>Anecdote with most votes</h1>
           </th>
-          <tr>{keyWithMoreVotes[anecdotes]}</tr>
+          <tr>{anecdotes[keyWithMoreVotes]}</tr>
+          <tr>has {mostVotes} votes</tr>
         </table>
       </div>
     </div>
