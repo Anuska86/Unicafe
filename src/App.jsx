@@ -39,7 +39,7 @@ const StatisticLine = (props) => {
     formatValue += "%";
   }
   return (
-    <div style={{ color: "green" }}>
+    <div>
       {props.title}: {formatValue}
     </div>
   );
@@ -50,9 +50,6 @@ const points = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 };
 const copy = { ...points };
 
 const App = () => {
-  const [mostVotes, setMostVotes] = useState(0);
-  const [keyWithMoreVotes, setkeyWithMoreVotes] = useState(0);
-  const [currentVotes, setcurrentVotes] = useState(0);
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
@@ -69,6 +66,9 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
   const [anecselected, setAnecselected] = useState(0);
+  const [mostVotes, setMostVotes] = useState(0);
+  const [keyWithMoreVotes, setkeyWithMoreVotes] = useState(0);
+  const [currentVotes, setcurrentVotes] = useState(0);
 
   const handlePointsClick = () => {
     copy[anecselected] += 1;
