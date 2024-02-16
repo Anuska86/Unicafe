@@ -74,12 +74,12 @@ const App = () => {
     setcurrentVotes(copy[anecselected]);
     console.log(copy);
     const mostVotes = Math.max(...Object.values(copy));
-
+    const keyWithMoreVotes = Object.keys(copy).reduce((a, b) => copy[a] > copy[b] ? a : b);
     console.log(mostVotes);
   };
 
   const keyWithMoreVotes = Object.keys(copy).reduce((a, b) => copy[a] > copy[b] ? a : b);
-  console.log (keyWithMoreVotes)
+  
 
   const handleGoodClick = () => {
     setGood(good + 1);
@@ -159,7 +159,7 @@ const App = () => {
           <th>
             <h1>Anecdote with most votes</h1>
           </th>
-          <tr>{keyWithMoreVotes[anecdotes]}</tr>
+          <tr>{keyWithMoreVotes}</tr>
         </table>
       </div>
     </div>
