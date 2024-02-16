@@ -108,6 +108,7 @@ const App = () => {
     const randomNumber = Math.floor(Math.random() * anecdotes.length);
     setAnecselected(randomNumber);
     setcurrentVotes(copy[randomNumber]);
+   
   };
 
   return (
